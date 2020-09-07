@@ -1,0 +1,27 @@
+{
+    "clientID": "f5e78cbd-12a7-4d18-94db-bf14ffe0cc5d",
+    "authority": "https://login.microsoftonline.com/tfp/adacapromeb2custest.onmicrosoft.com/B2C_1A_signup_signin_adacap-sys",
+    "redirectUri": "https://localhost:44323/login",
+    "validateAuthority": false,
+    "cacheLocation": "localStorage",
+    "postLogoutRedirectUri": "https://localhost:44323/login",
+    "navigateToLoginRequestUrl": false,
+    "popUp": true,
+    "consentScopes": [
+        "user_impersonation",
+        "https://adacapromeb2custest.onmicrosoft.com/api/user_impersonation"
+    ],
+    "protectedResourceMap": [
+        [
+            "https://localhost:44380",
+            [
+                "f5e78cbd-12a7-4d18-94db-bf14ffe0cc5d"
+            ]
+        ]
+    ],
+    "unprotectedResources": [
+        "/assets/"
+    ],
+    "loadFrameTimeout": 900000,
+    "renewTokenBeforeExpires": 420000
+}

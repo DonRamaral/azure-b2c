@@ -1,0 +1,7 @@
+<div>
+    <app-header *ngIf="displayNavigation()"></app-header>
+    <app-sidebar *ngIf="displayNavigation()"></app-sidebar>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

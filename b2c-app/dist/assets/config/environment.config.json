@@ -1,0 +1,6 @@
+{
+    "production": false,
+    "baseUrl": "https://localhost:44380",
+    "b2cAuthenticationFlow": "b2c_1a_signup_signin_adacap",
+    "b2cForgotPasswordFlow": "b2c_1a_passwordreset"
+}

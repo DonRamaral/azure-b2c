@@ -1,0 +1,27 @@
+{
+    "clientID": "{b2c-app-client-id}",
+    "authority": "https://{b2c-tenant-name}.b2clogin.com/tfp/{b2c-tenant-name}.onmicrosoft.com/{b2c-signup-signin-policy}",
+    "redirectUri": "http://localhost:4200/login",
+    "validateAuthority": false,
+    "cacheLocation": "localStorage",
+    "postLogoutRedirectUri": "http://localhost:4200/login",
+    "navigateToLoginRequestUrl": false,
+    "popUp": false,
+    "consentScopes": [
+        "user_impersonation",
+        "https://{b2c-tenant-name}.onmicrosoft.com/api/user_impersonation"
+    ],
+    "protectedResourceMap": [
+        [
+            "{api-url}",
+            [
+                "{b2c-app-client-id}"
+            ]
+        ]
+    ],
+    "unprotectedResources": [
+        "/assets/"
+    ],
+    "loadFrameTimeout": 900000,
+    "renewTokenBeforeExpires": 420000
+}

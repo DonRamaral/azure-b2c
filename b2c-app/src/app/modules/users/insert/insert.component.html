@@ -1,0 +1,17 @@
+<div>
+    <label for="fname">First Name</label>
+    <input [(ngModel)]="fname" type="text" placeholder="First Name..">
+
+    <label for="lname">Last Name</label>
+    <input [(ngModel)]="lname" type="text" placeholder="Last Name..">
+
+    <label for="email">Email</label>
+    <input [(ngModel)]="email" type="text" placeholder="Email..">
+
+    <label for="isInternalUser">Is Internal User</label>
+    <input [checked]="isInternalUser" (change)="isInternalUser = !isInternalUser" type="checkbox"/>
+
+    <label for="active">Active</label>
+    <input [checked]="active" (change)="active = !active" type="checkbox"/>
+</div>
+<button class="btn-submit" (click)="onSubmit()">Submit</button>

@@ -1,0 +1,6 @@
+{
+    "production": false,
+    "baseUrl": "{api-url}",
+    "b2cAuthenticationFlow": "{b2c-signup-signin-policy}",
+    "b2cForgotPasswordFlow": "{b2c-reset-password-policy}"
+}

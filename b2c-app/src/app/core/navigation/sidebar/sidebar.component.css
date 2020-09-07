@@ -1,0 +1,43 @@
+.sidebar
+{
+  width: 150px;
+  float: left;
+}
+
+.selected
+{
+  background-color: #ddf;
+}
+
+nav div
+{
+  border-top: solid 1px #fff;
+  width: inherit; 
+}
+
+nav div a
+{
+  display:inline-block;
+  text-decoration: none;
+  width: inherit;
+}
+
+nav div:hover
+{
+  background-color: #ddf;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+nav div div.sub
+{
+  border-top: solid 1px #fff;
+  width: inherit; 
+}
+
+nav div div.sub a
+{
+    text-indent: 10px;
+}

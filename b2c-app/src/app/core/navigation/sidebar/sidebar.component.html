@@ -1,0 +1,11 @@
+<nav class="sidebar">
+    <div>
+        <a [ngClass]="{'selected': router.url.startsWith('/dashboard')}" routerLink="/dashboard">Dashboard</a>
+    </div>
+    <div *ngIf="idToken && idToken.internalUser">
+        <a [ngClass]="{'selected': router.url.endsWith('/users')}" routerLink="/users">Users</a>
+        <div class="sub">
+        <a [ngClass]="{'selected': router.url.startsWith('/users/insert')}" routerLink="/users/insert">Insert</a>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,15 @@
+table tr td a
+{
+  display:inline-block;
+  text-decoration: none;
+  width: inherit;
+}
+
+table tr.row:hover
+{
+  background-color: #ddf;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}

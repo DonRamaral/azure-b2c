@@ -1,0 +1,48 @@
+<table>
+    <tr>
+        <th>
+            USER ID
+        </th>
+        <th>
+            FIRST NAME
+        </th>
+        <th>
+            LAST NAME
+        </th>
+        <th>
+            EMAIL
+        </th>
+        <th>
+            IS ACTIVE
+        </th>
+        <th>
+            IS INTERNAL USER
+        </th>
+        <th>
+            INVITATION URL
+        </th>
+    </tr>
+    <tr class="row" *ngFor="let user of userData">
+        <td>
+            {{user.userId}}
+        </td>
+        <td>
+            {{user.firstName}}
+        </td>
+        <td>
+            {{user.lastName}}
+        </td>
+        <td>
+            {{user.email}}
+        </td>
+        <td>
+            {{user.isActive}}
+        </td>
+        <td>
+            {{user.isInternalUser}}
+        </td>
+        <td>
+            <a *ngIf="user.invitationUrl" href="{{user.invitationUrl}}">Open</a>
+        </td>
+    </tr>
+</table>

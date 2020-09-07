@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[USER] (
+    [USER_ID]       INT           IDENTITY (1, 1) NOT NULL,
+    [FIRST_NAME]     VARCHAR (100) NOT NULL,
+    [LAST_NAME]     VARCHAR (100) NOT NULL,
+    [EMAIL]    VARCHAR (100) NOT NULL,
+    [INTERNAL] BIT         NOT NULL,
+    [ACTIVE] BIT           NOT NULL,
+    [INVITATION_URL] NTEXT
+);
+

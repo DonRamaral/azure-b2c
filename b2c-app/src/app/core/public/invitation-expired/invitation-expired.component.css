@@ -1,0 +1,40 @@
+.logo {
+    width: 190px;
+    height: auto;
+}
+
+.error-img {
+    width: 488px;
+    height: auto;
+}
+
+.main-message, .sub-message, .error-code {
+    display: block;
+    margin-bottom: 40px;
+    color: #242020;
+}
+
+.main-message {
+    font-weight: 700;
+    font-size: 76px;
+    line-height: 77px;
+}
+
+.sub-message {
+    font-size: 21px;
+    line-height: 27px;
+}
+
+.error-code {
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.brand-iamge {
+    position: absolute;
+    margin: 1em 0 0 1em;
+}
+
+.error-page-image {
+    text-align: center;
+}

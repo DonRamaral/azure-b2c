@@ -1,0 +1,20 @@
+input[type=text], select {
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+}
+
+.btn-submit:hover {
+  background-color: #ddf;
+}
+
+input[type=checkbox] {
+    margin-right: 10px;
+}

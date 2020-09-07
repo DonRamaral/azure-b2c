@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Azure.B2C.Function": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.btn-new
+{
+    float: right;
+}
+
+.btn-new:hover {
+  background-color: #ddf;
+}

@@ -1,0 +1,408 @@
+﻿<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="{b2c-tenant-name}.onmicrosoft.com" 
+  PolicyId="B2C_1A_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" 
+  TenantObjectId="{azure-tenant-that-hosts-b2c}">
+  <BasePolicy>
+    <TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkBase</PolicyId>
+  </BasePolicy>
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <ClaimType Id="tempObjectId">
+        <DisplayName>User's Object ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Object identifier (ID) of the user object in Azure AD.</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="userMessage">
+		    <DisplayName>Error</DisplayName>
+		    <DataType>string</DataType>
+		    <UserInputType>Paragraph</UserInputType>
+	    </ClaimType>
+      <ClaimType Id="userFirstName">
+        <DisplayName>UserFirstName</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="userSurname">
+        <DisplayName>UserSurname</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="userDisplayName">
+        <DisplayName>UserDisplayName</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="userId">
+        <DisplayName>User ID</DisplayName>
+        <DataType>int</DataType>
+      </ClaimType>
+      <ClaimType Id="userIsActive">
+        <DisplayName>User Is Active</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="internalUser">
+        <DisplayName>Internal User</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>      
+      <ClaimType Id="email">
+        <DisplayName>email</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="loginHint">
+        <DisplayName>Login Hint</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+    </ClaimsSchema>
+    <ClaimsTransformations>
+
+        <!--Demo: this claims transformation populates the userMessage with the text we want to show to the end user-->
+      <ClaimsTransformation Id="CreateTheUniqueEmailErrorMessage" TransformationMethod="FormatStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="You aleady have an account with {0} email address" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateEmailFromSignInNames" TransformationMethod="FormatStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="signInNames.emailAddress" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="{0}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="CreateEmailFromOtherMails" TransformationMethod="GetSingleItemFromStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="otherMails" TransformationClaimType="collection" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="extractedItem" />
+        </OutputClaims>
+      </ClaimsTransformation>
+    </ClaimsTransformations>
+  </BuildingBlocks>
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>REST APIs</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="GetUserByEmail-Invitation-PasswordReset-Flow">
+          <DisplayName>Azure Function Web Hook</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ServiceUrl">https://{function-app-with-tls-mutual}/api/GetUserByEmail</Item>
+            <Item Key="SendClaimsIn">Body</Item>
+            <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+            <Item Key="AuthenticationType">ClientCertificate</Item>
+            <!-- REMOVE the following line in production environments -->
+            <Item Key="AllowInsecureAuthInProduction">true</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="ClientCertificate" StorageReferenceId="B2C_1A_RestApiClientCertificate" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userId" PartnerClaimType="userId" />
+            <OutputClaim ClaimTypeReferenceId="userIsActive" PartnerClaimType="isActive" />
+            <OutputClaim ClaimTypeReferenceId="internalUser" PartnerClaimType="isInternalUser" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>REST APIs</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="GetUserByEmail-SignIn-Flow">
+          <DisplayName>Azure Function Web Hook</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ServiceUrl">https://{function-app-with-tls-mutual}/api/GetUserByEmail</Item>
+            <Item Key="SendClaimsIn">Body</Item>
+            <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+            <Item Key="AuthenticationType">ClientCertificate</Item>
+            <!-- REMOVE the following line in production environments -->
+            <Item Key="AllowInsecureAuthInProduction">true</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="ClientCertificate" StorageReferenceId="B2C_1A_RestApiClientCertificate" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="email" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userId" PartnerClaimType="userId" />
+            <OutputClaim ClaimTypeReferenceId="userIsActive" PartnerClaimType="isActive" />
+            <OutputClaim ClaimTypeReferenceId="internalUser" PartnerClaimType="isInternalUser" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CreateEmailFromSignInNames" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>REST APIs</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="GetUserByEmail-SignUp-Flow">
+          <DisplayName>Azure Function Web Hook</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ServiceUrl">https://{function-app-with-tls-mutual}/api/GetUserByEmail</Item>
+            <Item Key="SendClaimsIn">Body</Item>
+            <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+            <Item Key="AuthenticationType">ClientCertificate</Item>
+            <!-- REMOVE the following line in production environments -->
+            <Item Key="AllowInsecureAuthInProduction">true</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="ClientCertificate" StorageReferenceId="B2C_1A_RestApiClientCertificate" />
+          </CryptographicKeys>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateEmailFromOtherMails" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="email" />
+            <OutputClaim ClaimTypeReferenceId="userId" PartnerClaimType="userId" />
+            <OutputClaim ClaimTypeReferenceId="userIsActive" PartnerClaimType="isActive" />
+            <OutputClaim ClaimTypeReferenceId="internalUser" PartnerClaimType="isInternalUser" />
+          </OutputClaims>
+          <!--OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CreateEmailFromOtherMails" />
+          </OutputClaimsTransformations-->
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">9a1de7da-63d0-49e7-a74a-05c4097a467d</Item>
+            <Item Key="IdTokenAudience">38b536bc-5e6c-4595-8ac0-949acd3cea08</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="9a1de7da-63d0-49e7-a74a-05c4097a467d" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="38b536bc-5e6c-4595-8ac0-949acd3cea08" />
+          </InputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Azure Active Directory</DisplayName>
+      <TechnicalProfiles>
+      <!--Demo: This technical profile tries to find a local account with provided email address-->
+      <TechnicalProfile Id="AAD-UserReadUsingLocalAccountEmail-NoError">
+        <Metadata>
+          <Item Key="Operation">Read</Item>
+          <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+        </Metadata>
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames" Required="true" />
+        </InputClaims>
+        <OutputClaims>
+          <!-- Required claims -->
+          <OutputClaim ClaimTypeReferenceId="tempObjectId" PartnerClaimType="objectId"/>
+        </OutputClaims>
+        <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+      </TechnicalProfile>
+      
+      <!--Demo: This technical profile tries to find a social account with provided email address-->
+      <TechnicalProfile Id="AAD-UserReadUsingSocialEmail-NoError">
+        <Metadata>
+          <Item Key="Operation">Read</Item>
+          <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+        </Metadata>
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="strongAuthenticationEmailAddress" Required="true" />
+        </InputClaims>
+        <OutputClaims>
+          <!-- Required claims -->
+          <OutputClaim ClaimTypeReferenceId="tempObjectId" PartnerClaimType="objectId"/>
+        </OutputClaims>
+        <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+      </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Self Asserted</DisplayName>
+      <TechnicalProfiles>
+        <!--Demo: this technical profile displays the message to the user-->
+        <TechnicalProfile Id="SelfAsserted-UniqueUserMessage">
+          <DisplayName>Password reset</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+            <!--Demo: hide the continue and cancel buttons -->
+            <Item Key="setting.showContinueButton">false</Item>
+            <Item Key="setting.showCancelButton">false</Item>
+          </Metadata>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateTheUniqueEmailErrorMessage" />
+          </InputClaimsTransformations>
+          <InputClaims>
+             <InputClaim ClaimTypeReferenceId="userMessage" />
+          </InputClaims>
+          <OutputClaims>
+            <!--Demo: Show the paragraph claim with the message to the user -->
+            <OutputClaim ClaimTypeReferenceId="userMessage" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+      <ClaimsProvider>
+        <DisplayName>Token Issuer</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="JwtIssuer">
+            <Metadata>
+              <Item Key="token_lifetime_secs">900</Item>
+              <Item Key="id_token_lifetime_secs">900</Item>
+              <Item Key="refresh_token_lifetime_secs">86400</Item>
+              <Item Key="rolling_refresh_token_lifetime_secs">86400</Item>
+              <Item Key="IssuanceClaimPattern">AuthorityAndTenantGuid</Item>
+              <Item Key="AuthenticationContextReferenceClaimPattern">None</Item>
+            </Metadata>
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>
+  </ClaimsProviders>
+  <UserJourneys>
+    <UserJourney Id="SignUpSignIn">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <!-- Check if the user has selected to sign in using one of the social providers -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId). 
+          This can only happen when authentication happened using a social IDP. If local account was created or authentication done
+          using ESTS in step 2, then an user account must exist in the directory by this time. -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Demo:  Run this step only if email address is empty and new user.
+			    The technical profile checks if there is another local account with same email address.-->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+		        <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AAD-UserReadUsingLocalAccountEmail-NoError" TechnicalProfileReferenceId="AAD-UserReadUsingLocalAccountEmail-NoError" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Demo:  Run this step only if email address is empty and new user.
+			    The technical profile checks if there is another local account with same email address.-->
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>          
+		        <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>tempObjectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SelfAsserted-UniqueUserMessage" TechnicalProfileReferenceId="SelfAsserted-UniqueUserMessage" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
+          in the token. -->
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>authenticationSource</Value>
+              <Value>localAccountAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="GetLoyaltyData" TechnicalProfileReferenceId="GetUserByEmail-SignIn-Flow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>localAccountAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="GetLoyaltyData2" TechnicalProfileReferenceId="GetUserByEmail-SignUp-Flow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+ 
+        <OrchestrationStep Order="9" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+ 
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+  </UserJourneys>
+</TrustFrameworkPolicy>
