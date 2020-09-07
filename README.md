@@ -14,4 +14,4 @@ I am accomplishing the fallowing goals in this project:
     - Configure Angular MSAL login hint;
 
 ## Configuration
-Inside the [documentation folder]() there are instructions to configure all the resources that are necessary to run this project and instructions to update configuration files and custom policies.
+Inside the [documentation folder](https://github.com/DonRamaral/azure-b2c/tree/master/documentation) there are instructions to configure all the resources that are necessary to run this project and instructions to update configuration files and custom policies.
