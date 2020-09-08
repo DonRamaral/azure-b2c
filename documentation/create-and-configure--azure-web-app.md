@@ -6,7 +6,7 @@ The [Azure.B2C.Api](https://github.com/DonRamaral/azure-b2c/tree/master/b2c-api/
 
 ## Execution step
 
-1. Microsoft documentation describes how to publish and app as an Azure Web App here in [Publish your web app](https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?pivots=platform-windows#publish-your-web-app), keep in mind the project was developed using .Net Core 3.1 and instead of using the documentation sample you are going to use the [Azure.B2C.Api](https://github.com/DonRamaral/azure-b2c/tree/master/b2c-api/Azure.B2C.Api) project.
+1. Microsoft documentation describes how to publish an app as an Azure Web App here in [Publish your web app](https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?pivots=platform-windows#publish-your-web-app), keep in mind the project was developed using .Net Core 3.1 and instead of using the documentation sample you are going to use the [Azure.B2C.Api](https://github.com/DonRamaral/azure-b2c/tree/master/b2c-api/Azure.B2C.Api) project.
 
 2. Once create the Azure Web App we need to upload our self-signed certificate that Azure Web App so we can use it to sign JWT token hints and also use the certificate in *oidc* controller. To perform this tasks you will use either Azure Cloud Shell or Azure Powershell  and execute the fallowing command:
 
