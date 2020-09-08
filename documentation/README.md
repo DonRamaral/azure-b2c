@@ -5,7 +5,7 @@ There are many steps to be executed in order to run the whole application, among
 
   1. [Create a self-signed certificate](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-a-self-signed-certificate.md) 
   2. [Create and configure Azure SQL Server](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-and-configure-azure-sql-server.md)
-  3. [Create and configure Azure App Service](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-and-configure--azure-app-service.md)
+  3. [Create and configure Azure Web App](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-and-configure--azure-web-app.md)
   
 
 ## Configuration files
