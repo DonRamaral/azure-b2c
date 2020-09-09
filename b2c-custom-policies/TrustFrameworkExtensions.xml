@@ -195,12 +195,12 @@
       <TechnicalProfiles>
         <TechnicalProfile Id="login-NonInteractive">
           <Metadata>
-            <Item Key="client_id">9a1de7da-63d0-49e7-a74a-05c4097a467d</Item>
-            <Item Key="IdTokenAudience">38b536bc-5e6c-4595-8ac0-949acd3cea08</Item>
+            <Item Key="client_id">{Proxy-Identity-Experience-Framework}</Item>
+            <Item Key="IdTokenAudience">{Identity-Experience-Framework}</Item>
           </Metadata>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="9a1de7da-63d0-49e7-a74a-05c4097a467d" />
-            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="38b536bc-5e6c-4595-8ac0-949acd3cea08" />
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="{Proxy-Identity-Experience-Framework}" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="{Identity-Experience-Framework}" />
           </InputClaims>
         </TechnicalProfile>
       </TechnicalProfiles>

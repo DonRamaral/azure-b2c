@@ -9,6 +9,7 @@ There are many steps to be executed in order to run the whole application, among
   4. [Create and configure Azure Function](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-and-configure--azure-function.md)
   5. [Create and configure Azure Active Directory B2C](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/create-and-configure-azure-active-directory-b2c.md)
   6. [Update custom policy files](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/update-custom-policy-files.md)
+  7. [Configure Local Account Sign In](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/configure-local-account-sign-in.md)
   
 ## Configuration files
 
