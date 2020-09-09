@@ -13,9 +13,3 @@ There are many steps to be executed in order to run the whole application, among
   8. [Upload Custom Policies](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/upload-custom-policies.md)
   9. [Web API configuration files](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/web-api-configuration-files.md)
   10. [Web UI configuration files](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/web-ui-configuration-files.md)
-  
-## Configuration files
-
-  
-
-## Token substitution
