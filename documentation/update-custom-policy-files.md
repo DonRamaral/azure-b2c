@@ -26,95 +26,99 @@ Every file contains some parameters and attributes that changes according to you
 Update Custom Policy files according previous instructions.
 
 1. TrustFrameworkBase.xml
-  - TenantId --> {b2c-tenant-name}
-  - PublicPolicyUri --> {b2c-tenant-name}
-    ```xml
-    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="{b2c-tenant-name}.onmicrosoft.com"
-    PolicyId="B2C_1A_TrustFrameworkBase"
-    PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_TrustFrameworkBase">
-    ```
+      - TenantId --> {b2c-tenant-name}
+      - PublicPolicyUri --> {b2c-tenant-name}
+        ```xml
+        <TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="{b2c-tenant-name}.onmicrosoft.com"
+        PolicyId="B2C_1A_TrustFrameworkBase"
+        PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_TrustFrameworkBase">
+        ```
+
 2. TrustFrameworkExtensions.xml
-  - TenantId --> {b2c-tenant-name}
-  - PublicPolicyUri --> {b2c-tenant-name}
-  - TenantObjectId --> {azure-tenant-that-hosts-b2c}
-  - BasePolicy >> TenantId --> {b2c-tenant-name}
-    ```xml
-    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="{b2c-tenant-name}.onmicrosoft.com"
-    PolicyId="B2C_1A_TrustFrameworkExtensions"
-    PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions"
-    TenantObjectId="{azure-tenant-that-hosts-b2c}">
-	<BasePolicy>
-		<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
-		<PolicyId>B2C_1A_TrustFrameworkBase</PolicyId>
-	</BasePolicy>
-    ```
+      - TenantId --> {b2c-tenant-name}
+      - PublicPolicyUri --> {b2c-tenant-name}
+      - TenantObjectId --> {azure-tenant-that-hosts-b2c}
+      - BasePolicy >> TenantId --> {b2c-tenant-name}
+        ```xml
+        <TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="{b2c-tenant-name}.onmicrosoft.com"
+        PolicyId="B2C_1A_TrustFrameworkExtensions"
+        PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions"
+        TenantObjectId="{azure-tenant-that-hosts-b2c}">
+    	<BasePolicy>
+    		<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
+    		<PolicyId>B2C_1A_TrustFrameworkBase</PolicyId>
+    	</BasePolicy>
+        ```
+
 3. SignUpOrSignin.xml
-  - TenantId --> {b2c-tenant-name}
-  - PublicPolicyUri --> {b2c-tenant-name}
-  - BasePolicy >> TenantId --> {b2c-tenant-name}
-    ```xml
-    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="{b2c-tenant-name}.onmicrosoft.com"
-    PolicyId="B2C_1A_Signup_Signin"
-    PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_Signup_Signin"
-    DeploymentMode="Development"
-    UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
-    <BasePolicy>
-    	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
-    	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
-    </BasePolicy>  
-    ```
+      - TenantId --> {b2c-tenant-name}
+      - PublicPolicyUri --> {b2c-tenant-name}
+      - BasePolicy >> TenantId --> {b2c-tenant-name}
+        ```xml
+        <TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="{b2c-tenant-name}.onmicrosoft.com"
+        PolicyId="B2C_1A_Signup_Signin"
+        PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_Signup_Signin"
+        DeploymentMode="Development"
+        UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+        <BasePolicy>
+        	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
+        	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+        </BasePolicy>  
+        ```
+
 4. SignUpInvitation.xml
-  - TenantId --> {b2c-tenant-name}
-  - PublicPolicyUri --> {b2c-tenant-name}
-  - BasePolicy >> TenantId --> {b2c-tenant-name}
-    ```xml
-    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="{b2c-tenant-name}.onmicrosoft.com"
-    PolicyId="B2C_1A_Signup_Invitation"
-    PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_signup_invitation"
-    DeploymentMode="Development"
-    UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
-    <BasePolicy>
-    	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
-    	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
-    </BasePolicy>
-    ```
+      - TenantId --> {b2c-tenant-name}
+      - PublicPolicyUri --> {b2c-tenant-name}
+      - BasePolicy >> TenantId --> {b2c-tenant-name}
+        ```xml
+        <TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="{b2c-tenant-name}.onmicrosoft.com"
+        PolicyId="B2C_1A_Signup_Invitation"
+        PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_signup_invitation"
+        DeploymentMode="Development"
+        UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+        <BasePolicy>
+        	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
+        	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+        </BasePolicy>
+        ```
+
 5. PasswordReset.xml
-  - TenantId --> {b2c-tenant-name}
-  - PublicPolicyUri --> {b2c-tenant-name}
-  - BasePolicy >> TenantId --> {b2c-tenant-name}
-    ```xml
-    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="{b2c-tenant-name}.onmicrosoft.com"
-    PolicyId="B2C_1A_PasswordReset"
-    PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_PasswordReset"
-    DeploymentMode="Development"
-    UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
-    <BasePolicy>
-    	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
-    	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
-    </BasePolicy>
-    ```
+      - TenantId --> {b2c-tenant-name}
+      - PublicPolicyUri --> {b2c-tenant-name}
+      - BasePolicy >> TenantId --> {b2c-tenant-name}
+        ```xml
+        <TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="{b2c-tenant-name}.onmicrosoft.com"
+        PolicyId="B2C_1A_PasswordReset"
+        PublicPolicyUri="http://{b2c-tenant-name}.onmicrosoft.com/B2C_1A_PasswordReset"
+        DeploymentMode="Development"
+        UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+        <BasePolicy>
+        	<TenantId>{b2c-tenant-name}.onmicrosoft.com</TenantId>
+        	<PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+        </BasePolicy>
+        ```
