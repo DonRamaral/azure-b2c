@@ -12,18 +12,18 @@ Previously we registered two application on Azure AD B2C that are *IdentityExper
 
     ```xml
 	<ClaimsProvider>
-		<DisplayName>Local Account SignIn</DisplayName>
-		<TechnicalProfiles>
-			<TechnicalProfile  Id="login-NonInteractive">
-				<Metadata>
-					<Item  Key="client_id">{Proxy-Identity-Experience-Framework}</Item>
-					<Item  Key="IdTokenAudience">{Identity-Experience-Framework}</Item>
-				</Metadata>
-				<InputClaims>
-					<InputClaim  ClaimTypeReferenceId="client_id"  DefaultValue="{Proxy-Identity-Experience-Framework}"  />
-					<InputClaim  ClaimTypeReferenceId="resource_id"  PartnerClaimType="resource"  DefaultValue="{Identity-Experience-Framework}"  />
-				</InputClaims>
-			</TechnicalProfile>
-		</TechnicalProfiles>
+	<DisplayName>Local Account SignIn</DisplayName>
+	<TechnicalProfiles>
+		<TechnicalProfile  Id="login-NonInteractive">
+		<Metadata>
+			<Item  Key="client_id">{Proxy-Identity-Experience-Framework}</Item>
+			<Item  Key="IdTokenAudience">{Identity-Experience-Framework}</Item>
+		</Metadata>
+		<InputClaims>
+			<InputClaim  ClaimTypeReferenceId="client_id"  DefaultValue="{Proxy-Identity-Experience-Framework}"  />
+			<InputClaim  ClaimTypeReferenceId="resource_id"  PartnerClaimType="resource"  DefaultValue="{Identity-Experience-Framework}"  />
+		</InputClaims>
+		</TechnicalProfile>
+	</TechnicalProfiles>
 	</ClaimsProvider>
     ```
