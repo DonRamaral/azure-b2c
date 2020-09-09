@@ -13,3 +13,16 @@ There are many steps to be executed in order to run the whole application, among
   8. [Upload Custom Policies](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/upload-custom-policies.md)
   9. [Web API configuration files](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/web-api-configuration-files.md)
   10. [Web UI configuration files](https://github.com/DonRamaral/azure-b2c/tree/master/documentation/web-ui-configuration-files.md)
+
+  ## References
+
+  Here are some good references to help you with other tasks involving Azure AD B2C:
+  - [Azure AD B2C Samples](https://github.com/azure-ad-b2c/samples)
+  - [Secure your RESTful services](https://docs.microsoft.com/en-us/azure/active-directory-b2c/secure-rest-api#prepare-a-self-signed-certificate-optional)
+  - [Use a TLS/SSL certificate in your code in Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-certificate-in-code)
+  - [Configure TLS mutual authentication for Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth)
+  - [Tutorial: Register a web application in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/tutorial-register-applications?tabs=app-reg-ga)
+  - [Get started with custom policies in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/custom-policy-get-started?tabs=applications)
+  - [Set up sign-in with an Azure Active Directory account using custom policies in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/identity-provider-azure-ad-single-tenant-custom?tabs=app-reg-ga)
+  - [Microsoft Authentication Library for Angular](https://www.npmjs.com/package/@azure/msal-angular)
+  - [Tutorial: Customize the interface of user experiences in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/tutorial-customize-ui)

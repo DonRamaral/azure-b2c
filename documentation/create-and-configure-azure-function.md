@@ -2,7 +2,7 @@
 
 ## Summary
 
-The [Azure.B2C.Function](https://github.com/DonRamaral/azure-b2c/tree/master/b2c-api/Azure.B2C.Function) provides the GetUserByEmail method that will be used by AAD B2C to retireve additional claims when creating the JWT token.
+The [Azure.B2C.Function](https://github.com/DonRamaral/azure-b2c/tree/master/b2c-api/Azure.B2C.Function) provides the GetUserByEmail method that will be used by Azure AD B2C to retireve additional claims when creating the JWT token.
 
 ## Execution step
 
