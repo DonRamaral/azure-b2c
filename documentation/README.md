@@ -1,5 +1,5 @@
 # Summary
-There are many steps to be executed in order to run the whole application, among the steps you will find useful information about creating  and configuring Azure Resources. Make sure you are fallowing the *Execution Steps* in the  right order and once you finish it, execute the *Configuration files* and *Token substitution* steps as well.
+There are many steps to be executed to run the whole application, among the steps you will find useful information about creating and configuring Azure Resources. Make sure you are fallowing the *Execution Steps* in the right because some steps depends on the previous one.
 
 ## Execution steps order
 
